@@ -24,5 +24,9 @@
         Console.WriteLine(@"]88,          _,,aaaaaa,_       I88 8""  8 ]P'  .d' 88 88' ,8' I[");
         Console.WriteLine(@"`888a,.  ,aadd88888888888bma.   )88,  ,]I I8, .d' )88a8B ,d8 aI");
         Console.WriteLine(@"  ""888888PP""'        `8""""""8   ""888PP'  `888P'  `88P""88P""8m""");
+    
+    
+        var Nombre = Console.ReadLine();
+
     }
 }
