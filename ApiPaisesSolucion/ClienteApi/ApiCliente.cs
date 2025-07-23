@@ -14,7 +14,8 @@ namespace ClienteApi
 
         public ApiCliente()
         {
-            _httpClient.BaseAddress = new Uri("http://localhost:5240/");
+            //_httpClient.BaseAddress = new Uri("http://localhost:5240/");
+            _httpClient.BaseAddress = new Uri("https://localhost:7228");
         }
 
         public async Task EjecutarAsync()
