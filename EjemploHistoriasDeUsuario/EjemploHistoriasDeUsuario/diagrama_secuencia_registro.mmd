@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Usuario
+    participant Consola
+    participant Programa
+    participant ListaEdificios
+
+    Usuario->>Consola: Inicia aplicación
+    Consola->>Programa: Solicita dirección
+    Usuario->>Consola: Introduce dirección
+    Consola->>Programa: Solicita número de pisos
+    Usuario->>Consola: Introduce número de pisos
+    Consola->>Programa: Solicita si tiene ascensor
+    Usuario->>Consola: Introduce respuesta (s/n)
+    Programa->>ListaEdificios: Agrega nuevo edificio
+    Programa->>Consola: Muestra mensaje de éxito
+    Programa->>Consola: Muestra lista de edificios actualizada
