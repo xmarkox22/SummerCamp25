@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiPaisesProyecto.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPaisesProyecto.Controllers
@@ -32,11 +33,11 @@ namespace ApiPaisesProyecto.Controllers
         public IActionResult Get()
         {
             // Devuelve una lista de apartamentos simulada
-            var lista = new List<string>
+         var lista = new List<ApartamentoDto>
             {
-                "Apartamento 1",
-                "Apartamento 2",
-                "Apartamento 3"
+                new ApartamentoDto { Id = 1, Nombre = "Apartamento 1", Ciudad = "Ciudad A" },
+                new ApartamentoDto { Id = 2, Nombre = "Apartamento 2", Ciudad = "Ciudad B" },
+                new ApartamentoDto { Id = 3, Nombre = "Apartamento 3", Ciudad = "Ciudad C" }
             };
 
             return Ok(lista);
