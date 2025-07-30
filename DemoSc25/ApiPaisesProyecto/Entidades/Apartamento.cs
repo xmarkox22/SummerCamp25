@@ -1,12 +1,17 @@
-﻿namespace ApiPaisesProyecto.Models
+﻿namespace ApiPaisesProyecto.Entidades
 {
     /// <summary>
-    /// Dto Apartamentos    
+    /// 1 - Crear entidad Apartamento
     /// </summary>
-    public class ApartamentoDto
+    public class Apartamento
     {
         public int Id { get; internal set; }
         public string Nombre { get; internal set; }
         public string Ciudad { get; internal set; }
+
+        public string Puerta { get; set; }
+
+        public Edificio Edificio { get; set; }
+
     }
 }
