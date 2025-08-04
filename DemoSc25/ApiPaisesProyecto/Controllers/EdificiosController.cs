@@ -12,47 +12,47 @@ namespace ApiPaisesProyecto.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApartamentosController : ControllerBase
+    public class EdificiosController : ControllerBase
     {
         private readonly ContextoBaseDatos _context;
 
-        public ApartamentosController(ContextoBaseDatos context)
+        public EdificiosController(ContextoBaseDatos context)
         {
             _context = context;
         }
 
-        // GET: api/Apartamentos
+        // GET: api/Edificios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Apartamento>>> GetApartamentos()
+        public async Task<ActionResult<IEnumerable<Edificio>>> GetEdificios()
         {
-            return await _context.Apartamentos.ToListAsync();
+            return await _context.Edificios.ToListAsync();
         }
 
-        // GET: api/Apartamentos/5
+        // GET: api/Edificios/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Apartamento>> GetApartamento(int id)
+        public async Task<ActionResult<Edificio>> GetEdificio(int id)
         {
-            var apartamento = await _context.Apartamentos.FindAsync(id);
+            var edificio = await _context.Edificios.FindAsync(id);
 
-            if (apartamento == null)
+            if (edificio == null)
             {
                 return NotFound();
             }
 
-            return apartamento;
+            return edificio;
         }
 
-        // PUT: api/Apartamentos/5
+        // PUT: api/Edificios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutApartamento(int id, Apartamento apartamento)
+        public async Task<IActionResult> PutEdificio(int id, Edificio edificio)
         {
-            if (id != apartamento.Id)
+            if (id != edificio.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(apartamento).State = EntityState.Modified;
+            _context.Entry(edificio).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ApiPaisesProyecto.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ApartamentoExists(id))
+                if (!EdificioExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ApiPaisesProyecto.Controllers
             return NoContent();
         }
 
-        // POST: api/Apartamentos
+        // POST: api/Edificios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Apartamento>> PostApartamento(Apartamento apartamento)
+        public async Task<ActionResult<Edificio>> PostEdificio(Edificio edificio)
         {
-            _context.Apartamentos.Add(apartamento);
+            _context.Edificios.Add(edificio);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetApartamento", new { id = apartamento.Id }, apartamento);
+            return CreatedAtAction("GetEdificio", new { id = edificio.Id }, edificio);
         }
 
-        // DELETE: api/Apartamentos/5
+        // DELETE: api/Edificios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteApartamento(int id)
+        public async Task<IActionResult> DeleteEdificio(int id)
         {
-            var apartamento = await _context.Apartamentos.FindAsync(id);
-            if (apartamento == null)
+            var edificio = await _context.Edificios.FindAsync(id);
+            if (edificio == null)
             {
                 return NotFound();
             }
 
-            _context.Apartamentos.Remove(apartamento);
+            _context.Edificios.Remove(edificio);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ApartamentoExists(int id)
+        private bool EdificioExists(int id)
         {
-            return _context.Apartamentos.Any(e => e.Id == id);
+            return _context.Edificios.Any(e => e.Id == id);
         }
     }
 }
