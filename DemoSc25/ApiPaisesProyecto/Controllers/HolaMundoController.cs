@@ -9,30 +9,31 @@ namespace ApiPaisesProyecto.Controllers
     public class HolaMundoController : ControllerBase
     {
 
-        public ISaludo saludo { get; set; }
+        private ISaludo _saludo;
 
-        public HolaMundoController()
+        public HolaMundoController(ISaludo saludo)
         {
-            saludo = new ChineseSaludo();
+            //_saludo = new ChineseSaludo();
+            _saludo = saludo; // Inyección de dependencia   
         }
 
         [HttpGet]
         public IActionResult Get()
         {
 
-            //ISaludo saludo = new EnglishSaludo();
+            //ISaludo _saludo = new EnglishSaludo();
 
-            // Devuelve un saludo simple
-            return Ok(saludo.Saludar("Juan"));
+            // Devuelve un _saludo simple
+            return Ok(_saludo.Saludar("Juan"));
         }
 
        [HttpGet("{nombre}")]
         public IActionResult Get(string nombre)
         {
-            // Crea una instancia del servicio de saludo
-            //ISaludo saludo = new EnglishSaludo();
-            // Devuelve un saludo personalizado
-            return Ok(saludo.Saludar(nombre));
+            // Crea una instancia del servicio de _saludo
+            //ISaludo _saludo = new EnglishSaludo();
+            // Devuelve un _saludo personalizado
+            return Ok(_saludo.Saludar(nombre));
         }
 
     }
