@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApiPaisesProyecto.BaseDatos;
+using ApiPaisesProyecto.Entidades;
+using ApiPaisesProyecto.Models;
+using ApiPaisesProyecto.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ApiPaisesProyecto.BaseDatos;
-using ApiPaisesProyecto.Entidades;
-using ApiPaisesProyecto.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace ApiPaisesProyecto.Controllers
 {
@@ -37,10 +39,14 @@ namespace ApiPaisesProyecto.Controllers
             // 2-Devolver la lista de distritos en formato dto
             foreach (var distrito in distritos)
             {
+
                 listaDistritos.Add(new DistritoDto
                 {
                     Id = distrito.Id,
-                    Nombre = distrito.Nombre
+                    Nombre = distrito.Nombre.ConvertirMayusculas(),
+                    DireccionJuntaDistrital = distrito.DireccionJuntaDistrital.ConvertirMayusculas(),
+                    Responsable = distrito.Responsable.ConvertirMayusculas(),
+                    Antiguedad = distrito.FechaFundacion.CalcularAntiguedad()
                 });
             }
 

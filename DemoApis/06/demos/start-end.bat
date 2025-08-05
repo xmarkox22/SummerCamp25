@@ -1,0 +1,1 @@
+"C:\Program Files\Devart\Code Compare\CodeCompare.exe" ".\start" ".\end"

@@ -4,6 +4,7 @@ using ApiPaisesProyecto.BaseDatos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiPaisesProyecto.Migrations
 {
     [DbContext(typeof(ContextoBaseDatos))]
-    partial class ContextoBaseDatosModelSnapshot : ModelSnapshot
+    [Migration("20250805075012_distritosnombres2")]
+    partial class distritosnombres2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +65,6 @@ namespace ApiPaisesProyecto.Migrations
 
                     b.Property<string>("DireccionJuntaDistrital")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaFundacion")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
