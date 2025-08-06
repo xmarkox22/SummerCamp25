@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 
 namespace EjemplosLinq
 {
+    public enum Departamento
+    {
+        RH = 201,
+        Desarrollo = 520,
+        Soporte = 402,
+        Admin = 309
+    }
     public class Empleado
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public string Nombre { get; set; }
-        public string Cargo { get; set; }
-        public decimal SalarioMensual { get; set; }
-        public int AntiguedadAnios { get; set; }
+        public string Apellidos { get; set; }
 
-        // Campos agregados por procesos
-        public decimal SalarioAnual { get; set; }
-        public int DiasVacaciones { get; set; }
-        public string ClasificacionSalarial { get; set; }
-        public decimal Bonificacion { get; set; }
-        public int EdadEstimada { get; set; }
-        public DateTime FechaEstimacionAscenso { get; internal set; }
-        public int HorasTrabajadasAnuales { get; set; } = 2080; // Asumiendo 40 horas semanales y 50 semanas al año
-        public string PlanSalud { get; internal set; }
-        public int revisionContrato { get; internal set; }
-        public string RiesgoFuga { get; internal set; }
+
+        public Departamento Departamento { get; set; }
+        public string Ciudad { get; internal set; }
+        public string Telefono { get; internal set; }
+        public int Edad { get; internal set; }
+        public int IdExterno { get; internal set; }
+        public List<Pago> Pagos { get; internal set; }
     }
+
 }

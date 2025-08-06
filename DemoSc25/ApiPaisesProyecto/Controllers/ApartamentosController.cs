@@ -25,7 +25,17 @@ namespace ApiPaisesProyecto.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Apartamento>>> GetApartamentos()
         {
-            return await _context.Apartamentos.ToListAsync();
+            var lista = await _context.Apartamentos
+                                //.Where(apartamento => apartamento.Ciudad.Contains("a") && apartamento.Puerta.Contains("1"))
+                                //.Where(apartamento => apartamento.Ciudad == "Zanebury")
+                                .OrderBy(apartamento => apartamento.Nombre)
+                                .ToListAsync()   ;
+
+
+
+            return Ok(lista);
+
+            // return await _context.Apartamentos .ToListAsync();
         }
 
         // GET: api/Apartamentos/5

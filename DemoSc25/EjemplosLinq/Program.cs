@@ -9,22 +9,233 @@ Console.WriteLine("Hello, World!");
 
 //Ejemplo2();
 
-Ejemplo3();
+//Ejemplo3();
+
+//Ejemplo4();
+
+//Ejemplo5();
+
+
+Ejemplo6();
+
+
+static void Ejemplo6()
+{
+
+    // Lista de empleados
+    IEnumerable<Empleado> empleados = new List<Empleado>()
+         {
+
+             new Empleado
+             {
+                 Nombre = "Juan",
+                 Apellidos = "Hernandez",
+                 Ciudad = "Madrid",
+                 Telefono = "123456789",
+                 Edad = 25,
+                 Departamento = Departamento.Desarrollo
+             },
+             new Empleado
+             {
+                 Nombre = "Luisa",
+                 Apellidos = "Martinez",
+                 Ciudad = "Madrid",
+                 Telefono = "423456789",
+                 Edad = 26,
+                 Departamento= Departamento.Desarrollo
+             },
+             new Empleado
+             {
+                 Nombre = "Juan",
+                 Apellidos = "Nuñez",
+                 Ciudad = "Barcelona",
+                 Telefono = "9123456789",
+                 Edad = 32,
+                 Departamento = Departamento.Admin
+             },
+             new Empleado
+             {
+                 Nombre = "Maria",
+                 Apellidos = "Garcia",
+                 Ciudad = "Valencia",
+                 Telefono = "8123456789",
+                 Edad = 23,
+                 Departamento = Departamento.Desarrollo
+             },
+             new Empleado
+         {
+                 Nombre = "Rita",
+                 Apellidos = "Martinez",
+                 Ciudad = "Valencia",
+                 Telefono = "8123456789",
+                 Edad = 21,
+                  Departamento = Departamento.Admin
+             } };
+
+
+    // Listado de los  telefonos de los empleados de Madrid
+    // que contengan en su apellido una "a"
+    // que esten en el departamento de desarrollo
+    // ordenado por nombre
+
+
+    // Sintaxis de consulta
+    
+    
+    
+    
+    var resultado = from empleado in empleados
+                    where empleado.Ciudad == "Madrid" &&
+                          empleado.Apellidos.Contains("a") 
+                    select empleado;
+
+
+    var desarrollo = (from empleado in resultado
+                     where empleado.Departamento == Departamento.Desarrollo
+                     select empleado.Telefono).ToList();
+
+
+    var resultadoLista = desarrollo.ToList();
+
+
+    foreach (var telefono in desarrollo)
+    {
+        Console.WriteLine(telefono);
+    }
+
+
+
+    // Sintaxis de métodos en dos partes
+    IEnumerable<Empleado> resultadoMetodos = empleados
+        .Where(empleado => empleado.Ciudad == "Madrid" && empleado.Apellidos.Contains("a"));
+
+    List<string> resultadoDepartamento = resultadoMetodos
+        .Where(empleado => empleado.Departamento == Departamento.Desarrollo)
+        .OrderBy(empleado => empleado.Nombre)
+        .Select(empleado => empleado.Telefono)
+        .ToList();
+
+
+
+
+}
+
+
+static void Ejemplo5() {
+
+    string[] niveles = { "Basico", "Intermedio", "Avanzado" };
+
+
+    // Selecciona todos los niveles cuya longitud en caracteres
+    // sea mayor que 6
+    // ordenado por nivel alfabéticamente
+
+    // Tabla: Niveles
+    // +-----------------+
+    // | Nivel           |
+    // +-----------------+
+    // | Intermedio      |
+    // | Avanzado        |
+    // | Basic           |
+    // +-----------------+
+
+    // En SQL sería algo como:
+    // SELECT Nivel
+    // FROM Niveles
+    // WHERE LEN(Nivel) > 6
+    // ORDER BY Nivel;
+
+    // En C# con LINQ sería algo como:
+    
+    
+    // Sintaxis SQL
+    var nivelesMayores6Linq = from nivel in niveles
+                              where nivel.Length > 6
+                              orderby nivel
+                              select nivel;
+
+
+
+    // Sintaxis de Métodos
+
+    var nivelesMayores6LinqMetodos = niveles.Where(nivel => nivel.Length > 6)
+                                            .OrderBy(nivel => nivel)
+                                            .Select(nivel => nivel);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+static void Ejemplo4()
+{
+    string[] niveles = { "Basico", "Intermedio", "Avanzado" };
+    int nc = niveles.Count();
+
+    // Selecciona todos los niveles cuya longitud en caracteres
+    // sea mayor que 6
+    // ordenado por nivel alfabéticamente
+
+    List<string> nivelesMayores6 = new List<string>();
+
+    foreach (string nivel in niveles)
+    {
+        if (nivel.Length > 6)
+        {
+            nivelesMayores6.Add(nivel);
+        }
+    }
+
+    // Ordenar alfabéticamente con el algoritmo de ordenación Bubble Sort
+    for (int i = 0; i < nivelesMayores6.Count - 1; i++)
+    {
+        for (int j = 0; j < nivelesMayores6.Count - i - 1; j++)
+        {
+            if (string.Compare(nivelesMayores6[j], nivelesMayores6[j + 1]) > 0)
+            {
+                // Intercambiar
+                string temp = nivelesMayores6[j];
+                nivelesMayores6[j] = nivelesMayores6[j + 1];
+                nivelesMayores6[j + 1] = temp;
+            }
+        }
+    }
+
+    // Imprime los niveles ordenados
+    foreach (var nivel in nivelesMayores6)
+    {
+        Console.WriteLine(nivel);
+    }
+
+     
+
+}
 
 
 static void Ejemplo3()
 {
 
     // 1. Lista de empleados
-    List<Empleado> empleados = new List<Empleado>
+    List<EmpleadoAnterior> empleados = new List<EmpleadoAnterior>
         {
-            new Empleado { Nombre = "Ana", Cargo = "Administrativa", SalarioMensual = 1800m, AntiguedadAnios = 3 },
-            new Empleado { Nombre = "Luis", Cargo = "Técnico", SalarioMensual = 2200m, AntiguedadAnios = 5 },
-            new Empleado { Nombre = "Marta", Cargo = "Jefa de Proyecto", SalarioMensual = 3500m, AntiguedadAnios = 10 }
+            new EmpleadoAnterior { Nombre = "Ana", Cargo = "Administrativa", SalarioMensual = 1800m, AntiguedadAnios = 3 },
+            new EmpleadoAnterior { Nombre = "Luis", Cargo = "Técnico", SalarioMensual = 2200m, AntiguedadAnios = 5 },
+            new EmpleadoAnterior { Nombre = "Marta", Cargo = "Jefa de Proyecto", SalarioMensual = 3500m, AntiguedadAnios = 10 }
         };
 
     // 2. Lista de procesos FUNC que modifican al empleado y lo devuelven
-    List<Func<Empleado, Empleado>> procesos = new List<Func<Empleado, Empleado>>();
+    List<Func<EmpleadoAnterior, EmpleadoAnterior>> procesos = new List<Func<EmpleadoAnterior, EmpleadoAnterior>>();
 
     // Proceso 1: Calcular salario anual
     procesos.Add(e =>
