@@ -61,7 +61,8 @@ namespace ApiPaisesProyecto.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DireccionJuntaDistrital")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("FechaFundacion")
                         .HasColumnType("datetime2");
@@ -71,7 +72,8 @@ namespace ApiPaisesProyecto.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Responsable")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 

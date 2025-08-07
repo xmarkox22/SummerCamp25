@@ -1,9 +1,3 @@
-using ApiPaisesProyecto.BaseDatos;
-using ApiPaisesProyecto.Entidades;
-using ApiPaisesProyecto.Servicios;
-using Microsoft.EntityFrameworkCore;
-using Bogus;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // A-Agregar servicios a la aplicacion.
@@ -21,6 +15,8 @@ builder.Services.AddDbContext<ContextoBaseDatos>(options =>
 // Inyección de dependencias para el servicio de saludo
 builder.Services.AddSingleton<ISaludo, Saludo>();
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IGestionInmueblesService, GestionInmueblesService>();
 
 var app = builder.Build();
 

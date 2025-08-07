@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiPaisesProyecto.Migrations
 {
     [DbContext(typeof(ContextoBaseDatos))]
-    [Migration("20250805075012_distritosnombres2")]
-    partial class distritosnombres2
+    [Migration("20250807073028_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,14 +64,19 @@ namespace ApiPaisesProyecto.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DireccionJuntaDistrital")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("FechaFundacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Responsable")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
