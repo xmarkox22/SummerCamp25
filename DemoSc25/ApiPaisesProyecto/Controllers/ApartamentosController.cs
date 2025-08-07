@@ -1,118 +1,93 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ApiPaisesProyecto.BaseDatos;
+using ApiPaisesProyecto.Models;
 using ApiPaisesProyecto.Entidades;
+using ApiPaisesProyecto.Interfaces;
+using AutoMapper;
 
 namespace ApiPaisesProyecto.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/apartamentos")]
     [ApiController]
     public class ApartamentosController : ControllerBase
     {
-        private readonly ContextoBaseDatos _context;
-
-        public ApartamentosController(ContextoBaseDatos context)
+        private readonly IRepository<Apartamento> _apartamentoRepo;
+        private readonly ILogger<ApartamentosController> _logger;
+        private readonly IMapper _mapper;
+        public ApartamentosController(ILogger<ApartamentosController> logger,
+                                       IRepository<Apartamento> apartamentoRepo,
+                                       IMapper mapper)
         {
-            _context = context;
+            _apartamentoRepo = apartamentoRepo;
+            _logger = logger;
+            _mapper = mapper;
         }
 
-        // GET: api/Apartamentos
+        // GET: api/apartamentos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Apartamento>>> GetApartamentos()
+        public async Task<ActionResult<IEnumerable<ApartamentoDto>>> GetApartamentos()
         {
-            var lista = await _context.Apartamentos
-                                //.Where(apartamento => apartamento.Ciudad.Contains("a") && apartamento.Puerta.Contains("1"))
-                                //.Where(apartamento => apartamento.Ciudad == "Zanebury")
-                                .OrderBy(apartamento => apartamento.Nombre)
-                                .ToListAsync()   ;
-
-
-
-            return Ok(lista);
-
-            // return await _context.Apartamentos .ToListAsync();
+            _logger.LogInformation("Obteniendo lista de apartamentos");
+            var apartamentos = await _apartamentoRepo.GetAllAsync();
+            if (apartamentos == null || !apartamentos.Any())
+            {
+                _logger.LogWarning("No se encontraron apartamentos");
+                return NotFound("No se encontraron apartamentos");
+            }
+            var dtoList = _mapper.Map<List<ApartamentoDto>>(apartamentos);
+            return Ok(dtoList);
         }
 
-        // GET: api/Apartamentos/5
+        // GET api/apartamentos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Apartamento>> GetApartamento(int id)
+        public async Task<ActionResult<ApartamentoDto>> GetApartamento(int id)
         {
-            var apartamento = await _context.Apartamentos.FindAsync(id);
-
+            _logger.LogInformation($"Obteniendo apartamento con ID: {id}");
+            var apartamento = await _apartamentoRepo.GetByIdAsync(id);
             if (apartamento == null)
             {
-                return NotFound();
+                _logger.LogWarning($"Apartamento con ID: {id} no encontrado");
+                return NotFound($"Apartamento con ID: {id} no encontrado");
             }
-
-            return apartamento;
+            var dto = _mapper.Map<ApartamentoDto>(apartamento);
+            return Ok(dto);
         }
 
-        // PUT: api/Apartamentos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutApartamento(int id, Apartamento apartamento)
-        {
-            if (id != apartamento.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(apartamento).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ApartamentoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Apartamentos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST api/apartamentos
         [HttpPost]
-        public async Task<ActionResult<Apartamento>> PostApartamento(Apartamento apartamento)
+        public async Task<ActionResult<ApartamentoDto>> CreateApartamento([FromBody] ApartamentoCreateDto dto)
         {
-            _context.Apartamentos.Add(apartamento);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetApartamento", new { id = apartamento.Id }, apartamento);
+            if (dto == null)
+            {
+                _logger.LogError("Apartamento no puede ser nulo");
+                return BadRequest("Apartamento no puede ser nulo");
+            }
+            var apartamento = _mapper.Map<Apartamento>(dto);
+            await _apartamentoRepo.AddAsync(apartamento);
+            _logger.LogInformation($"Apartamento creado con ID: {apartamento.Id}");
+            var resultDto = _mapper.Map<ApartamentoDto>(apartamento);
+            return CreatedAtAction(nameof(GetApartamento), new { id = apartamento.Id }, resultDto);
         }
 
-        // DELETE: api/Apartamentos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteApartamento(int id)
+        // PUT api/apartamentos/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ApartamentoDto>> UpdateApartamento(int id, [FromBody] ApartamentoUpdateDto dto)
         {
-            var apartamento = await _context.Apartamentos.FindAsync(id);
+            if (dto == null)
+            {
+                _logger.LogError("Apartamento no puede ser nulo");
+                return BadRequest("Apartamento no puede ser nulo");
+            }
+            var apartamento = await _apartamentoRepo.GetByIdAsync(id);
             if (apartamento == null)
             {
-                return NotFound();
+                _logger.LogWarning($"Apartamento con ID: {id} no encontrado");
+                return NotFound($"Apartamento con ID: {id} no encontrado");
             }
-
-            _context.Apartamentos.Remove(apartamento);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ApartamentoExists(int id)
-        {
-            return _context.Apartamentos.Any(e => e.Id == id);
+            _mapper.Map(dto, apartamento);
+            await _apartamentoRepo.UpdateAsync(apartamento);
+            var resultDto = _mapper.Map<ApartamentoDto>(apartamento);
+            return Ok(resultDto);
         }
     }
 }

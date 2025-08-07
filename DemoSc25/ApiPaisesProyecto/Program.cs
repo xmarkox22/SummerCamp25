@@ -1,6 +1,21 @@
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+// Configurar Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+
 // A-Agregar servicios a la aplicacion.
+
+// Agregar servicio de Serilog
+builder.Logging.AddSerilog();
+
 
 builder.Services.AddControllers(); // Modelo-Vista-Controlador (MVC) para APIs
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,6 +32,7 @@ builder.Services.AddSingleton<ISaludo, Saludo>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IGestionInmueblesService, GestionInmueblesService>();
+builder.Services.AddAutoMapper(typeof(ApiPaisesProyecto.Servicios.MappingProfile));
 
 var app = builder.Build();
 

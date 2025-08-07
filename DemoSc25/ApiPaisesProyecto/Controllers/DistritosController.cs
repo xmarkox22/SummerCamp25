@@ -1,133 +1,108 @@
-﻿using ApiPaisesProyecto.BaseDatos;
-using ApiPaisesProyecto.Entidades;
+﻿using Microsoft.AspNetCore.Mvc;
 using ApiPaisesProyecto.Models;
-using ApiPaisesProyecto.Utilidades;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ApiPaisesProyecto.Entidades;
+using ApiPaisesProyecto.Interfaces;
+using AutoMapper;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ApiPaisesProyecto.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/distritos")]
     [ApiController]
     public class DistritosController : ControllerBase
     {
-        private readonly ContextoBaseDatos _context;
-
-        public DistritosController(ContextoBaseDatos context)
+        private readonly IRepository<Distrito> _distritoRepo;
+        private readonly ILogger<DistritosController> _logger;
+        private readonly IMapper _mapper;
+        public DistritosController(ILogger<DistritosController> logger,
+                                   IRepository<Distrito> distritoRepo,
+                                   IMapper mapper)
         {
-            _context = context;
+
+            _distritoRepo = distritoRepo;
+            _logger = logger;
+            _mapper = mapper;
         }
 
-        // GET: api/Distritos
         [HttpGet]
-        public async Task<ActionResult<List<DistritoDto>>> GetDistritos()
+        public async Task<ActionResult<IEnumerable<DistritoDto>>> GetDistritos()
         {
-            // Implementar devolver una lista de distritos en formato dto
-            // Aquí se podría usar un DTO si se desea limitar los campos devueltos
-
-            List<DistritoDto> listaDistritos = new List<DistritoDto>();
-
-            // 1-Traer todos los distritos de la base de datos
-            var distritos = await _context.Distritos.ToListAsync();
-
-            // 2-Devolver la lista de distritos en formato dto
-            foreach (var distrito in distritos)
+            _logger.LogInformation("Obteniendo lista de distritos");
+            var distritos = await _distritoRepo.GetAllAsync();
+            if (distritos == null || !distritos.Any())
             {
-
-                listaDistritos.Add(new DistritoDto
-                {
-                    Id = distrito.Id,
-                    Nombre = distrito.Nombre.ConvertirMayusculas(),
-                    DireccionJuntaDistrital = distrito.DireccionJuntaDistrital.ConvertirMayusculas(),
-                    Responsable = distrito.Responsable.ConvertirMayusculas(),
-                    Antiguedad = distrito.FechaFundacion.CalcularAntiguedad()
-                });
+                _logger.LogWarning("No se encontraron distritos");
+                return NotFound("No se encontraron distritos");
             }
-
-            return listaDistritos;
+            var dtoList = _mapper.Map<List<DistritoDto>>(distritos);
+            return Ok(dtoList);
         }
 
-        // GET: api/Distritos/5
+        // GET api/distritos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Distrito>> GetDistrito(int id)
+        public async Task<ActionResult<DistritoDto>> GetDistrito([FromRoute]   int id)
         {
-            var distrito = await _context.Distritos.FindAsync(id);
-
+            _logger.LogInformation($"Obteniendo distrito con ID: {id}");
+            var distrito = await _distritoRepo.GetByIdAsync(id);
             if (distrito == null)
             {
-                return NotFound();
+                _logger.LogWarning($"Distrito con ID: {id} no encontrado");
+                return NotFound($"Distrito con ID: {id} no encontrado");
             }
-
-            return distrito;
+            var dto = _mapper.Map<DistritoDto>(distrito);
+            return Ok(dto);
         }
 
-        // PUT: api/Distritos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDistrito(int id, Distrito distrito)
-        {
-            if (id != distrito.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(distrito).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DistritoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Distritos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST api/distritos
         [HttpPost]
-        public async Task<ActionResult<Distrito>> PostDistrito(Distrito distrito)
+        public async Task<ActionResult<DistritoDto>> CreateDistrito([FromBody] DistritoCreateDto dto)
         {
-            _context.Distritos.Add(distrito);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetDistrito", new { id = distrito.Id }, distrito);
+            if (dto == null)
+            {
+                _logger.LogError("Distrito no puede ser nulo");
+                return BadRequest("Distrito no puede ser nulo");
+            }
+            var distrito = _mapper.Map<Distrito>(dto);
+            await _distritoRepo.AddAsync(distrito);
+            _logger.LogInformation($"Distrito creado con ID: {distrito.Id}");
+            var resultDto = _mapper.Map<DistritoDto>(distrito);
+            return CreatedAtAction(nameof(GetDistrito), new { id = distrito.Id }, resultDto);
         }
-
-        // DELETE: api/Distritos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDistrito(int id)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DistritoDto>> UpdateDistrito([FromRoute] int id, [FromBody] DistritoUpdateDto dto)
         {
-            var distrito = await _context.Distritos.FindAsync(id);
+            if (dto == null)
+            {
+                _logger.LogError("Distrito no puede ser nulo");
+                return BadRequest("Distrito no puede ser nulo");
+            }
+            var distrito = await _distritoRepo.GetByIdAsync(id);
             if (distrito == null)
             {
-                return NotFound();
+                _logger.LogWarning($"Distrito con ID: {id} no encontrado");
+                return NotFound($"Distrito con ID: {id} no encontrado");
             }
-
-            _context.Distritos.Remove(distrito);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            _mapper.Map(dto, distrito);
+            await _distritoRepo.UpdateAsync(distrito);
+            var resultDto = _mapper.Map<DistritoDto>(distrito);
+            return Ok(resultDto);
         }
 
-        private bool DistritoExists(int id)
+        // DELETE api/distritos/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDistrito([FromRoute] int id)
         {
-            return _context.Distritos.Any(e => e.Id == id);
+            _logger.LogInformation($"Eliminando distrito con ID: {id}");
+            var distrito = await _distritoRepo.GetByIdAsync(id);
+            if (distrito == null)
+            {
+                _logger.LogWarning($"Distrito con ID: {id} no encontrado");
+                return NotFound($"Distrito con ID: {id} no encontrado");
+            }
+            await _distritoRepo.DeleteAsync(id);
+            _logger.LogInformation($"Distrito con ID: {id} eliminado");
+            return NoContent();
         }
     }
 }

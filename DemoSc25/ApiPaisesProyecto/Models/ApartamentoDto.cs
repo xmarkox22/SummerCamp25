@@ -3,10 +3,8 @@
     /// <summary>
     /// Dto Apartamentos    
     /// </summary>
-    public class ApartamentoDto
+    public class ApartamentoDto : ApartamentoBaseDto
     {
         public int Id { get; internal set; }
-        public string Nombre { get; internal set; }
-        public string Ciudad { get; internal set; }
     }
 }
