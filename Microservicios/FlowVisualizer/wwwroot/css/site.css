@@ -1,0 +1,12 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; padding: 0; }
+.container { max-width: 1000px; margin: 0 auto; padding: 1rem; }
+header h1 { margin: .5rem 0 1rem; }
+.panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.form-row { display: grid; grid-template-columns: 160px 1fr; gap: .75rem; align-items: center; margin-bottom: .75rem; }
+.form-actions { display: flex; justify-content: flex-end; }
+input, textarea { padding: .5rem .6rem; border-radius: 8px; border: 1px solid #e5e7eb; font-size: 14px; }
+button { padding: .55rem .9rem; border-radius: 10px; border: 0; background: #2563eb; color: #fff; cursor: pointer; }
+button:hover { background: #1e40af; }
+.validation { color: #dc2626; }
+footer { margin-top: 2rem; color: #6b7280; }
+.mermaid { border: 1px dashed #cbd5e1; border-radius: 8px; padding: .5rem; background: #fafafa; }

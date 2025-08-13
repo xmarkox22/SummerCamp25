@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Microservices MVC Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health - Catalog",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5001/api/products/health"
+      }
+    },
+    {
+      "name": "Health - Order",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5002/api/orders/health"
+      }
+    },
+    {
+      "name": "Health - Billing",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5003/api/billing/health"
+      }
+    },
+    {
+      "name": "Get Product (exists)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5001/api/products/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"productId\": \"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\", \"quantity\": 1, \"customerEmail\": \"cliente@contoso.com\"}"
+        },
+        "url": "http://localhost:5002/api/orders"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow Visualizer</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });</script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Flow Visualizer (Mermaid)</h1>
+        </header>
+        <main role="main">
+            @RenderBody()
+        </main>
+        <footer>
+            <small>Demo educativa .NET 8 · Mermaid</small>
+        </footer>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

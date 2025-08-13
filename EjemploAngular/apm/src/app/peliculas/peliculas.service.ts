@@ -28,6 +28,7 @@ export class PeliculasService {
     );
   }
 
+
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
