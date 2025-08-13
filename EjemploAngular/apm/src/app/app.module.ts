@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CounterdemoComponent } from './counterdemo/counterdemo.component';
 import { CardDemoComponent } from './card-demo/card-demo.component';
+import { PeliculasComponent } from './peliculas/peliculas.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     CounterdemoComponent,
-    CardDemoComponent
+    CardDemoComponent,
+    PeliculasComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
