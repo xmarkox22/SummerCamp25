@@ -1,3 +1,6 @@
+using BillingService.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +20,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+builder.Services.AddDbContext<BillingDbContext>(opt =>
+    opt.UseInMemoryDatabase("BillingDb"));
 
 var app = builder.Build();
 

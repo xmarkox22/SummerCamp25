@@ -53,7 +53,7 @@ public class BackgroundDispatcher(
             }
 
             await db.SaveChangesAsync(stoppingToken);
-            await Task.Delay(300, stoppingToken);
+            await Task.Delay(10000, stoppingToken);
         }
     }
 }
