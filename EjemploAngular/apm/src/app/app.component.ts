@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
                 <h1>{{ title }}</h1>
                 <div>Mi primer componente</div>
                 <pm-welcome></pm-welcome>
-                <pm-counterdemo></pm-counterdemo>
-                <pm-card-demo></pm-card-demo>
+                <pm-counterdemo [initialValue]="5"></pm-counterdemo>
+                <pm-cursos-lista></pm-cursos-lista>
                 <pm-peliculas></pm-peliculas>
              </div>` 
 })

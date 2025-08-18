@@ -1,0 +1,13 @@
+
+<h2>Lista de Cursos Demo</h2>
+<div class="cursos-lista">
+  <div *ngFor="let curso of cursos">
+    <pm-card-demo
+      [titulo]="curso.titulo"
+      [descripcion]="curso.descripcion"
+      [imagenUrl]="curso.imagenUrl"
+      [fecha]="curso.fecha"
+      [autor]="curso.autor">
+    </pm-card-demo>
+  </div>
+</div>

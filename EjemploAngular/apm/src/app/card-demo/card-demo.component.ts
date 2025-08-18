@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'pm-card-demo',
@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './card-demo.component.css'
 })
 export class CardDemoComponent {
-  titulo: string = 'Angular con Bootstrap';
-  descripcion: string = 'Este es un ejemplo de card en Angular utilizando Bootstrap.';
-  imagenUrl: string = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
-  fecha: string = new Date().toLocaleDateString();
+  @Input() titulo: string = '';
+  @Input() descripcion: string = '';
+  @Input() imagenUrl: string = '';
+  @Input() fecha: string = '';
+  @Input() autor: string = '';
 }

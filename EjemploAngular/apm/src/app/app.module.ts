@@ -9,6 +9,7 @@ import { CardDemoComponent } from './card-demo/card-demo.component';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     WelcomeComponent,
     CounterdemoComponent,
     CardDemoComponent,
-    PeliculasComponent
+    PeliculasComponent,
+    CursosListaComponent
   ],
   imports: [
     BrowserModule,
