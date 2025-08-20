@@ -1,0 +1,54 @@
+<p>demo-validaciones works!</p>
+
+
+<form [formGroup]="formularioContacto" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre:</label>
+    <input id="nombre" formControlName="nombre" class="form-control">
+    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger small mt-1">
+      <div *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</div>
+      <div *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</div>
+      <div *ngIf="nombre.errors?.['maxlength']">El nombre debe tener máximo 50 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input id="email" type="email" formControlName="email" class="form-control">
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger small mt-1">
+      <div *ngIf="email.errors?.['required']">El email es obligatorio.</div>
+      <div *ngIf="email.errors?.['email']">Formato de email no válido.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="mensaje" class="form-label">Mensaje:</label>
+    <textarea id="mensaje" formControlName="mensaje" class="form-control" rows="3"></textarea>
+    <div *ngIf="mensaje.invalid && (mensaje.dirty || mensaje.touched)" class="text-danger small mt-1">
+      <div *ngIf="mensaje.errors?.['required']">El mensaje es obligatorio.</div>
+      <div *ngIf="mensaje.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="edad" class="form-label">Edad:</label>
+      <input id="edad" type="number" formControlName="edad" class="form-control">
+      <div *ngIf="edad.invalid && (edad.dirty || edad.touched)" class="text-danger small mt-1">
+        <div *ngIf="edad.errors?.['min']">La edad mínima es 18.</div>
+        <div *ngIf="edad.errors?.['max']">La edad máxima es 120.</div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="telefono" class="form-label">Teléfono:</label>
+      <input id="telefono" type="text" formControlName="telefono" class="form-control">
+      <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger small mt-1">
+        <div *ngIf="telefono.errors?.['pattern']">El teléfono debe tener 9 dígitos numéricos.</div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!formularioContacto.valid">
+    Enviar
+  </button>
+</form>

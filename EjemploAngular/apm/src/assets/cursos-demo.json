@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "titulo": "Angular Básico",
     "descripcion": "Aprende los fundamentos de Angular y desarrolla tu primera aplicación.",
     "imagenUrl": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
@@ -7,6 +8,7 @@
     "autor": "Juan Pérez"
   },
   {
+    "id": 2,
     "titulo": "TypeScript para Principiantes",
     "descripcion": "Domina TypeScript y mejora tus proyectos en Angular.",
     "imagenUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
@@ -14,6 +16,7 @@
     "autor": "Ana Gómez"
   },
   {
+    "id": 3,
     "titulo": "Desarrollo Web Moderno",
     "descripcion": "Explora las mejores prácticas y herramientas modernas para desarrollo web.",
     "imagenUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",

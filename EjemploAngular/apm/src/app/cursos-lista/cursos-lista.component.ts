@@ -8,6 +8,7 @@ import { CursosDemoService, CursoDemo } from '../cursos-demo.service';
 })
 export class CursosListaComponent implements OnInit {
   cursos: CursoDemo[] = [];
+  cursoSeleccionado: string | null = null;
 
   constructor(private cursosService: CursosDemoService) {}
 

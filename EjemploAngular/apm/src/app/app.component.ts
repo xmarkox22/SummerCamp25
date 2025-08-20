@@ -2,14 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'pm-root',
-  template: `<div>
-                <h1>{{ title }}</h1>
-                <div>Mi primer componente</div>
-                <pm-welcome></pm-welcome>
-                <pm-counterdemo [initialValue]="5"></pm-counterdemo>
-                <pm-cursos-lista></pm-cursos-lista>
-                <pm-peliculas></pm-peliculas>
-             </div>` 
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+
 })
 export class AppComponent {
   title = 'apm ver 1.0';
