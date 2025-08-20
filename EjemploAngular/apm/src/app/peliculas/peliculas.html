@@ -1,0 +1,16 @@
+<h2 style="text-align:center; color:#1976d2; margin-bottom:24px;">🎬 Lista de películas de Star Wars</h2>
+<div *ngIf="loading" style="text-align:center; font-size:1.2em; color:#888;">Cargando...</div>
+<div *ngIf="errorMessage" style="color:red; text-align:center;">{{ errorMessage }}</div>
+<div *ngIf="!loading && !errorMessage && peliculas.length === 0" style="text-align:center; color:#888;">No hay películas para mostrar.</div>
+<div class="peliculas-list" *ngIf="!loading && !errorMessage && peliculas.length > 0">
+	<div *ngFor="let pelicula of peliculas" class="pelicula-card">
+		<h3>{{ pelicula.title }}</h3>
+		<p><strong>Director:</strong> {{ pelicula.director }}</p>
+		<p><strong>Productor:</strong> {{ pelicula.producer }}</p>
+		<p><strong>Fecha de estreno:</strong> {{ pelicula.release_date | date:'longDate' }}</p>
+		<details>
+			<summary>Ver introducción</summary>
+			<pre style="white-space:pre-wrap;">{{ pelicula.opening_crawl }}</pre>
+		</details>
+	</div>
+</div>
