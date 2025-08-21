@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+// ...existing code...
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -10,6 +9,9 @@ import { DemoFormbuilderComponent } from './demo-formbuilder/demo-formbuilder.co
 import { DemoValidacionesComponent } from './demo-validaciones/demo-validaciones.component';
 import { PaisesListaComponent } from './paises-lista/paises-lista.component';
 
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PaisDetalleComponent } from './pais-detalle/pais-detalle.component';
 const routes: Routes = [
   { path: 'cursos', component: CursosListaComponent },
   { path: 'peliculas', component: PeliculasComponent },
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'demo-form-registro', component: RegistroComponent },
   { path: 'demo-formbuilder', component: DemoFormbuilderComponent },
   { path: 'demo-validaciones', component: DemoValidacionesComponent },
+  { path: 'pais/:id', component: PaisDetalleComponent },
   { path: 'paises', component: PaisesListaComponent },
   { path: '', component: WelcomeComponent },
   { path: '**', redirectTo: '' }

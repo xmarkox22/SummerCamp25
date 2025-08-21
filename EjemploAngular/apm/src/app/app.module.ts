@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -16,6 +15,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { DemoFormbuilderComponent } from './demo-formbuilder/demo-formbuilder.component';
 import { DemoValidacionesComponent } from './demo-validaciones/demo-validaciones.component';
 import { PaisesListaComponent } from './paises-lista/paises-lista.component';
+import { PaisDetalleComponent } from './pais-detalle/pais-detalle.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { PaisesListaComponent } from './paises-lista/paises-lista.component';
     DemoFormbuilderComponent,
     DemoValidacionesComponent,
     PaisesListaComponent
+  ,PaisDetalleComponent
   ],
   // ...existing code...
   imports: [

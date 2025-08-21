@@ -11,6 +11,11 @@ export interface Pais {
   fechaFinTemporadaAlta?: string;
 }
 
+export interface PaisesPaginados {
+  paises: Pais[];
+  totalRegistros: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PaisesService {
   private apiUrl = 'https://localhost:7228/api/paises';
@@ -21,14 +26,14 @@ export class PaisesService {
     idioma?: string,
     nombre?: string,
     numeroPagina: number = 1,
-    tamañoPagina: number = 5
-  ): Observable<Pais[]> {
+    tamanoPagina: number = 5
+  ): Observable<PaisesPaginados> {
     let params = new HttpParams();
     if (idioma) params = params.set('idioma', idioma);
     if (nombre) params = params.set('nombre', nombre);
     params = params.set('numeroPagina', numeroPagina.toString());
-    params = params.set('tamañoPagina', tamañoPagina.toString());
-    return this.http.get<Pais[]>(this.apiUrl, { params });
+    params = params.set('tamañoPagina', tamanoPagina.toString());
+    return this.http.get<PaisesPaginados>(this.apiUrl, { params });
   }
 
   getPais(id: number): Observable<Pais> {

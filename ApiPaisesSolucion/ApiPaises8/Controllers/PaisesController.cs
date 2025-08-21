@@ -50,27 +50,22 @@ namespace ApiPaisesProyecto.Controllers
                                  [FromQuery] int numeroPagina = 1,
                                  [FromQuery] int tamañoPagina = TamañoPagina
                                  ) // Devuelve un IActionResult
-                                   // IActionResult es una interfaz que representa
-                                   // el resultado de un método de acción
-                                   // Get es un método de acción
         {
             var textoSaludo = saludo.saludar("Juan");
             logger.LogInformation(textoSaludo);
 
-            //var gestionPaises = new GestionPaises();
-            var paises = await gestionPaises.ObtenerTodosFiltrado(idioma,nombre,numeroPagina,tamañoPagina);
-
-            
+            // Desestructurar la tupla devuelta por ObtenerTodosFiltrado
+            var (paises, totalRegistros) = await gestionPaises.ObtenerTodosFiltrado(idioma,nombre,numeroPagina,tamañoPagina);
 
             foreach (var pais in paises)
             {
-                   pais.Nombre =  pais.Nombre.ConvertirNombreAMayusculas();
-                pais.Capital = pais.Nombre.ConvertirNombreAMayusculas();
-                pais.Idioma = pais.Nombre.ConvertirNombreAMayusculas();
+                pais.Nombre = pais.Nombre;   //.ConvertirNombreAMayusculas();
+                pais.Capital = pais.Capital; //?.ConvertirNombreAMayusculas();
+                pais.Idioma = pais.Idioma;// ?.ConvertirNombreAMayusculas();
             }
 
-            logger.LogInformation($"Obteniendo todos los paises. Numero de paises: {paises.Count}".ConvertirNombreAMayusculas());
-            return Ok(paises);
+            logger.LogInformation($"Obteniendo todos los paises. Numero de paises: {totalRegistros}".ConvertirNombreAMayusculas());
+            return Ok(new { paises, totalRegistros });
         }
 
 
