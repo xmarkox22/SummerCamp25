@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace ApiPaises8.Migrations
 {
     /// <inheritdoc />
@@ -43,28 +41,6 @@ namespace ApiPaises8.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Paises",
-                columns: new[] { "Id", "Capital", "FechaFinTemporadaAlta", "FechaInicioTemporadaAlta", "Idioma", "Nombre" },
-                values: new object[,]
-                {
-                    { 1, "Madrid", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Español", "España" },
-                    { 2, "París", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Francés", "Francia" },
-                    { 3, "Roma", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Italiano", "Italia" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Usuarios",
-                columns: new[] { "Id", "Apellidos", "Email", "Nombre" },
-                values: new object[,]
-                {
-                    { 1, "García", "", "Juan" },
-                    { 2, "Lopez", "", "Maria" },
-                    { 3, "Gomez", "", "Pedro" },
-                    { 4, "Rodriguez", "", "Laura" },
-                    { 5, "Perez", "", "Carlos" }
                 });
         }
 

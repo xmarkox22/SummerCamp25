@@ -15,6 +15,7 @@ import { DemoFormReactivoComponent } from './demo-form-reactivo/demo-form-reacti
 import { RegistroComponent } from './registro/registro.component';
 import { DemoFormbuilderComponent } from './demo-formbuilder/demo-formbuilder.component';
 import { DemoValidacionesComponent } from './demo-validaciones/demo-validaciones.component';
+import { PaisesListaComponent } from './paises-lista/paises-lista.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,10 @@ import { DemoValidacionesComponent } from './demo-validaciones/demo-validaciones
     DemoFormReactivoComponent,
     RegistroComponent,
     DemoFormbuilderComponent,
-    DemoValidacionesComponent
+    DemoValidacionesComponent,
+    PaisesListaComponent
   ],
+  // ...existing code...
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -8,18 +8,19 @@ import { DemoFormReactivoComponent } from './demo-form-reactivo/demo-form-reacti
 import { RegistroComponent } from './registro/registro.component';
 import { DemoFormbuilderComponent } from './demo-formbuilder/demo-formbuilder.component';
 import { DemoValidacionesComponent } from './demo-validaciones/demo-validaciones.component';
+import { PaisesListaComponent } from './paises-lista/paises-lista.component';
 
 const routes: Routes = [
-
-    { path: 'cursos', component: CursosListaComponent },
-    { path: 'peliculas', component: PeliculasComponent },
-    { path: 'curso-detalle/:id', component: CursoDetalleComponent },
-    { path: 'demo-form-reactivo', component: DemoFormReactivoComponent },
-    { path: 'demo-form-registro', component: RegistroComponent },
-    { path: 'demo-formbuilder', component: DemoFormbuilderComponent },
-    { path: 'demo-validaciones', component: DemoValidacionesComponent },
-    { path: '', component: WelcomeComponent },
-    { path: '**', redirectTo: '' }
+  { path: 'cursos', component: CursosListaComponent },
+  { path: 'peliculas', component: PeliculasComponent },
+  { path: 'curso-detalle/:id', component: CursoDetalleComponent },
+  { path: 'demo-form-reactivo', component: DemoFormReactivoComponent },
+  { path: 'demo-form-registro', component: RegistroComponent },
+  { path: 'demo-formbuilder', component: DemoFormbuilderComponent },
+  { path: 'demo-validaciones', component: DemoValidacionesComponent },
+  { path: 'paises', component: PaisesListaComponent },
+  { path: '', component: WelcomeComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
