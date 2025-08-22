@@ -45,14 +45,11 @@ namespace ApiPaisesProyecto.Servicios
             return await contextoApi.Paises.ToListAsync();
         }
 
-        public async Task<List<Pais>> ObtenerTodosFiltrado(string? idioma, string? nombre, int numeroPagina, int TamañoPagina)
+        // Cambiar la firma para devolver una tupla con la lista y el total de registros
+        public async Task<(List<Pais> paises, int totalRegistros)> ObtenerTodosFiltrado(string? idioma, string? nombre, int numeroPagina, int TamañoPagina)
         {
-           // En una consulta LINQ hay dos fases
-           // 1. Definición de la consulta
-            var consulta = from pais in contextoApi.Paises
-                           select pais;
+            var consulta = contextoApi.Paises.AsQueryable();
 
-           // Agregar criterios de filtrado y búsqueda
             if (!string.IsNullOrEmpty(idioma))
             {
                 idioma = idioma.Trim();
@@ -64,40 +61,16 @@ namespace ApiPaisesProyecto.Servicios
                 nombre = nombre.Trim();
                 consulta = consulta.Where(pais => pais.Nombre.Contains(nombre));
             }
-            // Ordenar por nombre de pais
-            consulta = consulta.OrderBy(pais => pais.Nombre);
 
-            // Paginación
-            consulta = consulta.Skip((numeroPagina - 1) * TamañoPagina).Take(TamañoPagina);
+            var totalRegistros = await consulta.CountAsync();
 
-            // Paginacion optimizada para muchos registros sin utilizar skip y take
-            // No se debe utilizar skip y take para paginar en bases de datos grandes
-            // Se debe utilizar una paginación basada en el valor de la clave primaria
-            // Ejemplo
-            // Si la clave primaria es un entero
-            // Se puede hacer una paginación basada en el valor de la clave primaria
+            var paises = await consulta
+                .OrderBy(pais => pais.Nombre)
+                .Skip((numeroPagina - 1) * TamañoPagina)
+                .Take(TamañoPagina)
+                .ToListAsync();
 
-            // Paginación
-            // Paginacion optimizada para muchos registros sin utilizar skip y take
-            // No se debe utilizar skip y take para paginar en bases de datos grandes
-            // Se debe utilizar una paginación basada en el valor de la clave primaria
-            // Ejemplo
-            // Si la clave primaria es un entero
-            // Se puede hacer una paginación basada en el valor de la clave primaria
-            //var ultimoIdPaginaAnterior = contextoApi.Paises
-            //    .OrderByDescending(pais => pais.Id)
-            //    .Skip((numeroPagina - 1) * TamañoPagina)
-            //    .Take(1)
-            //    .Select(pais => pais.Id)
-            //    .FirstOrDefault();
-
-            //consulta = consulta.Where(pais => pais.Id <= ultimoIdPaginaAnterior);
-
-            // 2. Ejecución de la consulta
-
-
-            // 2. Ejecución de la consulta
-            return await consulta.ToListAsync();
+            return (paises, totalRegistros);
         }
     }
 }

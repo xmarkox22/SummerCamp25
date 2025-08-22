@@ -1,0 +1,17 @@
+<h2>Lista de Películas</h2>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<div class="cards-container" *ngIf="peliculas.length">
+	<div class="card" *ngFor="let pelicula of peliculas">
+		<div class="card-header">
+			<h3>{{ pelicula.title }}</h3>
+			<span class="episode">Episodio {{ pelicula.episode_id }}</span>
+		</div>
+		<div class="card-body">
+			<p class="release-date">Fecha de estreno: {{ pelicula.release_date }}</p>
+			<p><strong>Director:</strong> {{ pelicula.director }}</p>
+			<p><strong>Productor:</strong> {{ pelicula.producer }}</p>
+			<p class="opening-crawl">{{ pelicula.opening_crawl }}</p>
+		</div>
+	</div>
+</div>
+<div *ngIf="!peliculas.length && !errorMessage">Cargando...</div>

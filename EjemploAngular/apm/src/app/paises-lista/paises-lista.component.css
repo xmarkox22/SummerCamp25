@@ -1,0 +1,27 @@
+.filtros {
+  margin-bottom: 1em;
+}
+
+.filtros input {
+  margin-right: 0.5em;
+}
+
+.paginacion {
+  margin-top: 1em;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  text-align: left;
+}

@@ -1,0 +1,67 @@
+:host {
+  width: 100%;
+  display: block;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.card {
+  width: 288px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 18px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
+}
+
+.card-img-top {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.card-text {
+  margin: 0 0 10px 0;
+  color: #444;
+  font-size: 1rem;
+}
+
+.text-muted {
+  margin: 0 0 10px 0;
+}
+
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+  display: block;
+}
+
+button:hover {
+  background: #1565c0;
+}

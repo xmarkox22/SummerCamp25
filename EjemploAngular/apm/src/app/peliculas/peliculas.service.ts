@@ -28,6 +28,10 @@ export class PeliculasService {
     );
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> caabf0da35491bce2eec8ac13a3a410f508f9357
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {

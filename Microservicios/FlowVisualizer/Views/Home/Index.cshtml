@@ -1,0 +1,49 @@
+@model FlowVisualizer.Models.OrderFormViewModel
+@{
+    Layout = "_Layout";
+}
+
+<section class="panel">
+    <h2>Simular pedido</h2>
+    <form asp-action="Index" method="post">
+        <div class="form-row">
+            <label>ProductId</label>
+            <input asp-for="ProductId" value="@Model.ProductId" />
+            <span asp-validation-for="ProductId" class="validation"></span>
+        </div>
+        <div class="form-row">
+            <label>Cantidad</label>
+            <input asp-for="Quantity" type="number" min="1" value="@Model.Quantity" />
+            <span asp-validation-for="Quantity" class="validation"></span>
+        </div>
+        <div class="form-row">
+            <label>Email</label>
+            <input asp-for="CustomerEmail" type="email" value="@Model.CustomerEmail" />
+            <span asp-validation-for="CustomerEmail" class="validation"></span>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Simular flujo</button>
+        </div>
+        @Html.AntiForgeryToken()
+    </form>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.MermaidDiagram))
+{
+    <section class="panel">
+        <h2>Diagrama (Mermaid)</h2>
+        <p><strong>OrderId:</strong> @Model.OrderId</p>
+        <div class="mermaid">
+@Html.Raw(Model.MermaidDiagram)
+        </div>
+
+        <details>
+            <summary>Ver código Mermaid</summary>
+            <textarea rows="14" style="width:100%">@Model.MermaidDiagram</textarea>
+        </details>
+    </section>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -45,35 +45,6 @@ namespace ApiPaises8.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Paises");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Capital = "Madrid",
-                            FechaFinTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FechaInicioTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Idioma = "Español",
-                            Nombre = "España"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Capital = "París",
-                            FechaFinTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FechaInicioTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Idioma = "Francés",
-                            Nombre = "Francia"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Capital = "Roma",
-                            FechaFinTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FechaInicioTemporadaAlta = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Idioma = "Italiano",
-                            Nombre = "Italia"
-                        });
                 });
 
             modelBuilder.Entity("ConversorAcme.Api.Entidades.Usuario", b =>
@@ -95,43 +66,6 @@ namespace ApiPaises8.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Apellidos = "García",
-                            Email = "",
-                            Nombre = "Juan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Apellidos = "Lopez",
-                            Email = "",
-                            Nombre = "Maria"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Apellidos = "Gomez",
-                            Email = "",
-                            Nombre = "Pedro"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Apellidos = "Rodriguez",
-                            Email = "",
-                            Nombre = "Laura"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Apellidos = "Perez",
-                            Email = "",
-                            Nombre = "Carlos"
-                        });
                 });
 #pragma warning restore 612, 618
         }

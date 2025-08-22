@@ -1,1 +1,30 @@
 <p>demo-form-reactivo works!</p>
+<<<<<<< HEAD
+=======
+
+<div class="container">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" [formControl]="nombre">
+
+    <p>Valor actual: {{ nombre.value }}</p>
+    <p>¿Modificado?: {{ nombre.dirty }}</p>
+    <p>¿Válido?: {{ nombre.valid }}</p>
+
+    <label for="apellido">Apellido:</label>
+    <input id="apellido" type="text" [formControl]="apellido">
+
+    <p>Valor actual: {{ apellido.value }}</p>
+    <p>¿Modificado?: {{ apellido.dirty }}</p>
+    <p>¿Válido?: {{ apellido.valid }}</p>
+
+
+    <button (click)="actualizarNombre()">
+        Cambiar a Carlos
+    </button>
+
+    <button (click)="reiniciar()">
+        Reiniciar
+    </button>
+
+</div>
+>>>>>>> caabf0da35491bce2eec8ac13a3a410f508f9357

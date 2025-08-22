@@ -1,0 +1,15 @@
+<h2>Lista de Cursos Demo</h2>
+<p *ngIf="cursoSeleccionado" class="alert alert-info">Curso seleccionado: {{ cursoSeleccionado }}</p>
+<div class="cursos-lista">
+  <div *ngFor="let curso of cursos">
+    <pm-card-demo
+      [id]="curso.id"
+      [titulo]="curso.titulo"
+      [descripcion]="curso.descripcion"
+      [imagenUrl]="curso.imagenUrl"
+      [fecha]="curso.fecha"
+      [autor]="curso.autor"
+      (seleccionar)="cursoSeleccionado = $event">
+    </pm-card-demo>
+  </div>
+</div>

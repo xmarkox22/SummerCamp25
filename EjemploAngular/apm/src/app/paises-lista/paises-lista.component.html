@@ -1,0 +1,42 @@
+<div class="filtros">
+  <input [(ngModel)]="nombre" placeholder="Filtrar por nombre" />
+  <input [(ngModel)]="idioma" placeholder="Filtrar por idioma" />
+  <button (click)="buscar()">Buscar</button>
+  <button (click)="resetFiltros()" type="button">Resetear filtros</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Idioma</th>
+      <th>Capital</th>
+      <th>Inicio Temporada Alta</th>
+      <th>Fin Temporada Alta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pais of paises">
+      <td>{{ pais.id }}</td>
+      <td>
+        <a [routerLink]="['/pais', pais.id]" style="cursor:pointer; color:#1976d2; text-decoration:underline;">
+          {{ pais.nombre }}
+        </a>
+      </td>
+      <td>{{ pais.idioma }}</td>
+      <td>{{ pais.capital }}</td>
+    <td>{{ pais.fechaInicioTemporadaAlta | date:'dd/MM/yyyy' }}</td>
+    <td>{{ pais.fechaFinTemporadaAlta | date:'dd/MM/yyyy' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="paginacion">
+  <button (click)="irPrimeraPagina()" [disabled]="paginaActual === 1">Primera</button>
+  <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+  <button (click)="paginaSiguiente()" [disabled]="(paginaActual * tamanoPagina) >= totalRegistros">Siguiente</button>
+  <button (click)="irUltimaPagina()" [disabled]="paginaActual === totalPaginas">Última</button>
+</div>
+<div *ngIf="totalRegistros > 0" style="margin-top:8px;">Total de registros: {{ totalRegistros }}</div>

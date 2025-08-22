@@ -1,0 +1,96 @@
+<p>demo-validaciones works!</p>
+
+
+<form [formGroup]="formularioContacto" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre:</label>
+    <input id="nombre" formControlName="nombre" class="form-control" minlength="2" maxlength="50">
+    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger small mt-1">
+      <div *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</div>
+      <div *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</div>
+      <div *ngIf="nombre.errors?.['maxlength']">El nombre debe tener máximo 50 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input id="email" type="email" formControlName="email" class="form-control">
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger small mt-1">
+      <div *ngIf="email.errors?.['required']">El email es obligatorio.</div>
+      <div *ngIf="email.errors?.['email']">Formato de email no válido.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="mensaje" class="form-label">Mensaje:</label>
+    <textarea id="mensaje" formControlName="mensaje" class="form-control" rows="3"></textarea>
+    <div *ngIf="mensaje.invalid && (mensaje.dirty || mensaje.touched)" class="text-danger small mt-1">
+      <div *ngIf="mensaje.errors?.['required']">El mensaje es obligatorio.</div>
+      <div *ngIf="mensaje.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="edad" class="form-label">Edad:</label>
+      <input id="edad" type="number" formControlName="edad" class="form-control" min="18" max="120">
+      <div *ngIf="edad.invalid && (edad.dirty || edad.touched)" class="text-danger small mt-1">
+        <div *ngIf="edad.errors?.['min']">La edad mínima es 18.</div>
+        <div *ngIf="edad.errors?.['max']">La edad máxima es 120.</div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="telefono" class="form-label">Teléfono:</label>
+      <input id="telefono" type="text" formControlName="telefono" class="form-control" maxlength="9">
+      <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger small mt-1">
+        <div *ngIf="telefono.errors?.['pattern']">El teléfono debe tener 9 dígitos numéricos.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+    <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" class="form-control" min="1900-01-01" [max]="hoy">
+    <div *ngIf="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched)" class="text-danger small mt-1">
+      <div *ngIf="fechaNacimiento.errors?.['required']">La fecha de nacimiento es obligatoria.</div>
+      <div *ngIf="fechaNacimiento.errors?.['fechaMinima']">La fecha debe ser posterior a 01/01/1900.</div>
+      <div *ngIf="fechaNacimiento.errors?.['fechaMaxima']">La fecha no puede ser mayor a hoy.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="rol" class="form-label">Rol:</label>
+    <select id="rol" formControlName="rol" class="form-select">
+      <option value="">Seleccione una opción</option>
+      <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+    </select>
+    <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="text-danger small mt-1">
+      <div *ngIf="rol.errors?.['required']">Debe seleccionar un rol.</div>
+      <div *ngIf="rol.errors?.['rolInvalido']">Seleccione una opción válida.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Estado civil</label>
+    <div>
+      <ng-container *ngFor="let opcion of estadoCivilOpciones">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [value]="opcion" formControlName="estadoCivil" [id]="'estadoCivil_' + opcion">
+          <label class="form-check-label" [for]="'estadoCivil_' + opcion">{{ opcion }}</label>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="estadoCivil?.invalid && (estadoCivil?.dirty || estadoCivil?.touched)" class="text-danger">
+      Selecciona un estado civil.
+    </div>
+  </div>
+
+  <div class="form-check mb-3">
+    <input id="dadoDeAlta" type="checkbox" formControlName="dadoDeAlta" class="form-check-input">
+    <label for="dadoDeAlta" class="form-check-label">¿Está dado de alta?</label>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!formularioContacto.valid">
+    Enviar
+  </button>
+</form>

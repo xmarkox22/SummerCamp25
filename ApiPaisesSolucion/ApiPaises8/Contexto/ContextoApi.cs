@@ -58,20 +58,20 @@ namespace ApiPaisesProyecto.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // Agregar tres paises por defecto a la base de datos
-            modelBuilder.Entity<Pais>().HasData(
-                                          new Pais { Id = 1, Nombre = "España", Idioma = "Español", Capital = "Madrid" },
-                                          new Pais { Id = 2, Nombre = "Francia", Idioma = "Francés", Capital = "París" },
-                                          new Pais { Id = 3, Nombre = "Italia", Idioma = "Italiano", Capital = "Roma" }
-                                          );
-            // Agregar tres usuarios por defecto a la base de datos mediante modelBuilder
-            modelBuilder.Entity<Usuario>().HasData(
-                                          new Usuario { Id = 1, Nombre = "Juan", Apellidos = "García", Email = "" },
-                                          new Usuario { Id = 2, Nombre = "Maria", Apellidos = "Lopez", Email = "" },
-                                          new Usuario { Id = 3, Nombre = "Pedro", Apellidos = "Gomez", Email = "" },
-                                          new Usuario { Id = 4, Nombre = "Laura", Apellidos = "Rodriguez", Email = "" },
-                                          new Usuario { Id = 5, Nombre = "Carlos", Apellidos = "Perez", Email = "" }
-                                          );
+            //// Agregar tres paises por defecto a la base de datos
+            //modelBuilder.Entity<Pais>().HasData(
+            //                              new Pais { Id = 1, Nombre = "España", Idioma = "Español", Capital = "Madrid" },
+            //                              new Pais { Id = 2, Nombre = "Francia", Idioma = "Francés", Capital = "París" },
+            //                              new Pais { Id = 3, Nombre = "Italia", Idioma = "Italiano", Capital = "Roma" }
+            //                              );
+            //// Agregar tres usuarios por defecto a la base de datos mediante modelBuilder
+            //modelBuilder.Entity<Usuario>().HasData(
+            //                              new Usuario { Id = 1, Nombre = "Juan", Apellidos = "García", Email = "" },
+            //                              new Usuario { Id = 2, Nombre = "Maria", Apellidos = "Lopez", Email = "" },
+            //                              new Usuario { Id = 3, Nombre = "Pedro", Apellidos = "Gomez", Email = "" },
+            //                              new Usuario { Id = 4, Nombre = "Laura", Apellidos = "Rodriguez", Email = "" },
+            //                              new Usuario { Id = 5, Nombre = "Carlos", Apellidos = "Perez", Email = "" }
+            //                              );
         }
     }
    
